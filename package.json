@@ -1,0 +1,19 @@
+{
+  "name": "ereg_server",
+  "version": "1.0.0",
+  "description": "QUản lý đăng ký thi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tung1998/EReg_Server.git"
+  },
+  "author": "tung1998",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tung1998/EReg_Server/issues"
+  },
+  "homepage": "https://github.com/tung1998/EReg_Server#readme"
+}
