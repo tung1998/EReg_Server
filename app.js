@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 //router
 const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
 // const loginRouter = require('./routes/login');
 
 
@@ -35,7 +35,7 @@ mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${proc
         app.use(checkUser);
 
         //add router
-        // app.use('/users', usersRouter);
+        app.use('/users', usersRouter);
         // app.use('/login', loginRouter);
         app.use('/', indexRouter);
 
