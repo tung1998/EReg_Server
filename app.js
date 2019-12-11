@@ -23,42 +23,51 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-//connect mysql
+// app.use((req, res, next) => {
+//     req.ip = getIP(req)
+//     res.header("Access-Control-Allow-Origin", "*")
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+//     next()
+// })
+//connect mongoose
 mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DATABASE}`, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(db => {
-        app.locals.db = db;
-
-        app.use(checkUser);
-
-        //add router
-        app.use('/users', usersRouter);
-        // app.use('/login', loginRouter);
-        app.use('/', indexRouter);
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: false
+}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-        // catch 404 and forward to error handler
-        app.use((req, res, next) => {
-            next(createError(404));
-        });
+// app.use(checkUser);
 
-        // error handler
-        app.use((err, req, res, next) => {
-            // set locals, only providing error in development
-            res.locals.message = err.message;
-            res.locals.error = req.app.get('env') === 'development' ? err : {};
+//add router
+app.use('/users', usersRouter);
+// app.use('/login', loginRouter);
+app.use('/', indexRouter);
 
-            // render the error page
-            res.status(err.status || 500);
-            res.render('error/error');
-        });
 
-    }).catch(error=>{
-        console.log(error)
-    });
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+    next(createError(404));
+});
+
+// error handler
+app.use((err, req, res, next) => {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.send('error/error');
+});
+
+
 
 
 
@@ -82,3 +91,10 @@ function checkUser(req, res, next) {
 }
 
 module.exports = app;
+
+function getIP(req) {
+    return (req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        (req.connection.socket ? req.connection.socket.remoteAddress : '')).split(",")[0]
+}
