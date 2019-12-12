@@ -5,17 +5,18 @@ const cookie = require('cookie');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-
 //router
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 // const loginRouter = require('./routes/login');
 
-
 const app = express();
 
-
-//other setup
+//connect mongoose
+mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DATABASE}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -30,20 +31,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 //     next()
 // })
-//connect mongoose
-mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DATABASE}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({
-    extended: false
-}));
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 // app.use(checkUser);
+
+
 
 //add router
 app.use('/users', usersRouter);
@@ -64,7 +55,7 @@ app.use((err, req, res, next) => {
 
     // render the error page
     res.status(err.status || 500);
-    res.send('error/error');
+    res.send({error:'Page not found'});
 });
 
 
