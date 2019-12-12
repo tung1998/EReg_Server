@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Crypto = require('./crypto')
 const ObjectId = mongoose.Types.ObjectId
 
 const USERS = new mongoose.Schema({
@@ -11,9 +12,6 @@ const USERS = new mongoose.Schema({
         min: 0,
         max: 1
     },
-    email: String,
-    phone: String,
-    address: String,
     isDeleted: {
         type: Boolean,
         default: false
@@ -31,6 +29,9 @@ module.exports = {
 }
 
 function getAll() {
+    console.log(Crypto.encodeSHA256('tung1998'))
+    Crypto.random32Bytes().then(console.log)
+
     return Users.find({
         isDeleted: false
     })
