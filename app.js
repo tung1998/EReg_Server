@@ -5,12 +5,17 @@ const cookie = require('cookie');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
+//colection
+const Users = require('./model/users')
+const Variable = require('./configVariables')
+
 //router
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 // const loginRouter = require('./routes/login');
 
 const app = express();
+
 
 //connect mongoose
 mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DATABASE}`, {
@@ -23,7 +28,6 @@ app.use(express.urlencoded({
     extended: false
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 // app.use((req, res, next) => {
 //     req.ip = getIP(req)
 //     res.header("Access-Control-Allow-Origin", "*")
@@ -32,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     next()
 // })
 
-// app.use(checkUser);
+app.use(checkUser);
 
 
 
@@ -55,33 +59,51 @@ app.use((err, req, res, next) => {
 
     // render the error page
     res.status(err.status || 500);
-    res.send({error:'Page not found'});
+    res.send({
+        error: 'Page not found'
+    });
 });
 
 
 
-
-
 function checkUser(req, res, next) {
-    let cookies = cookie.parse(req.headers.cookie || '');
-    if (!cookies.name) {
-        req.user = false;
-        next();
-    } else {
-        connection.query(`SELECT id, RootID, username FROM account WHERE cookie = "${cookies.name}"AND activate="1"`, (err, result, field) => {
-            // console.log(result);
-            if (result.length) {
-                req.user = result[0];
-                next();
-            } else {
-                req.user = false;
-                next();
-            }
-        })
+    let _PERMISSION = Variable._PERMISSION()
+    let url = `${req.method} ${req.originalUrl}`
+    if (checkPermission(url, _PERMISSION.NO_RULE)) next()
+    else {
+        let cookies = cookie.parse(req.headers.cookie || '');
+        accessToken = cookies.accessToken
+        if (accessToken) {
+            Users.getByAccessToken(accessToken).then(user => {
+                req.user = user
+                if ((user.userType == 0 && checkPermission(url, _PERMISSION.MANAGER)) || (user.userType == 1 && checkPermission(url, _PERMISSION.STUDENT)))
+                    next()
+                else res.send({
+                    error: 'you have not permission to access!'
+                })
+            }).catch(error => {
+                res.send({
+                    error: 'you have not permission to access!'
+                })
+            })
+        } else {
+            res.send({
+                error: 'you have not permission to access!'
+            })
+        }
     }
 }
 
-module.exports = app;
+function checkPermission(string, expressions) {
+    var len = expressions.length,
+        i = 0;
+    for (; i < len; i++) {
+        if (string.match(expressions[i])) {
+            return true;
+        }
+    }
+    return false;
+};
 
 function getIP(req) {
     return (req.headers['x-forwarded-for'] ||
@@ -89,3 +111,5 @@ function getIP(req) {
         req.socket.remoteAddress ||
         (req.connection.socket ? req.connection.socket.remoteAddress : '')).split(",")[0]
 }
+
+module.exports = app;

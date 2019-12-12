@@ -6,12 +6,8 @@ const USERS = new mongoose.Schema({
     username: String,
     password: String,
     salt: String,
-    access_token: String,
-    userType: {
-        type: Number,
-        min: 0,
-        max: 1
-    },
+    accessToken: String,
+    userType: Number,
     isDeleted: {
         type: Boolean,
         default: false
@@ -25,13 +21,12 @@ module.exports = {
     getByID,
     create,
     update,
-    deleteOne
+    deleteOne,
+    getByAccessToken,
+    changePass
 }
 
 function getAll() {
-    console.log(Crypto.encodeSHA256('tung1998'))
-    Crypto.random32Bytes().then(console.log)
-
     return Users.find({
         isDeleted: false
     })
@@ -40,6 +35,13 @@ function getAll() {
 function getByID(id) {
     return Users.findOne({
         _id: ObjectId(id),
+        isDeleted: false
+    })
+}
+
+function getByAccessToken(accessToken) {
+    return Users.findOne({
+        accessToken,
         isDeleted: false
     })
 }
@@ -60,4 +62,15 @@ function deleteOne(id) {
     }, {
         isDeleted: true
     })
+}
+
+async function changePass(id, newPass){
+    try{
+        newSalt = await Crypto.random32Bytes()
+        newAccessToken = await Crypto.random32Bytes()
+        console.log(newSalt,newAccessToken)
+    }
+    catch(error){
+        throw error
+    }
 }
