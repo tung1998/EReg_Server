@@ -12,6 +12,7 @@ const Variable = require('./configVariables')
 //router
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const studentsRouter = require('./routes/students');
 // const loginRouter = require('./routes/login');
 
 const app = express();
@@ -42,6 +43,7 @@ app.use(checkUser);
 
 //add router
 app.use('/users', usersRouter);
+app.use('/students', studentsRouter);
 // app.use('/login', loginRouter);
 app.use('/', indexRouter);
 

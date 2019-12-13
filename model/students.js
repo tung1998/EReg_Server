@@ -1,16 +1,47 @@
 const mongoose = require('mongoose');
 
-const USERS = new mongoose.Schema({
+const STUDENTS = new mongoose.Schema({
     name: 'string',
     size: 'string'
 });
 
-const Users = mongoose.model('Users', USERS);
+const Students = mongoose.model('Students', STUDENTS);
 
 module.exports = {
-    getAll
+    getAll,
+    getByID,
+    create,
+    update,
+    deleteOne
 }
 
 function getAll() {
-    return Users.find({})
+    return Students.find({
+        isDeleted: false
+    })
+}
+
+function getByID(id) {
+    return Students.findOne({
+        _id: ObjectId(id),
+        isDeleted: false
+    })
+}
+
+function create(data) {
+    return Students.create(data)
+}
+
+function update(id, data) {
+    return Students.update({
+        _id: ObjectId(id)
+    }, data)
+}
+
+function deleteOne(id) {
+    return Students.update({
+        _id: ObjectId(id)
+    }, {
+        isDeleted: true
+    })
 }
