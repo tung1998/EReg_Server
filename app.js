@@ -76,11 +76,11 @@ function checkUser(req, res, next) {
         if (accessToken) {
             Users.getByAccessToken(accessToken).then(user => {
                 req.user = user
-                if ((user.userType == 0 && checkPermission(url, _PERMISSION.MANAGER)) || (user.userType == 1 && checkPermission(url, _PERMISSION.STUDENT)))
+                if ((user.userType == 0 && checkPermission(url, _PERMISSION.MANAGER)) || (user.userType == 1 && checkPermission(url, _PERMISSION.STUDENT))||checkPermission(url, _PERMISSION.BOTH))
                     next()
                 else res.send({
                     error: 'you have not permission to access!'
-                })
+                }).end()
             }).catch(error => {
                 res.send({
                     error: 'you have not permission to access!'
@@ -95,10 +95,9 @@ function checkUser(req, res, next) {
 }
 
 function checkPermission(string, expressions) {
-    var len = expressions.length,
-        i = 0;
-    for (; i < len; i++) {
-        if (string.match(expressions[i])) {
+    var len = expressions.length;
+    for (i = 0; i < len; i++) {
+        if (expressions[i].test(string)) {
             return true;
         }
     }

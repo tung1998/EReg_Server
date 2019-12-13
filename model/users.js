@@ -23,7 +23,8 @@ module.exports = {
     update,
     deleteOne,
     getByAccessToken,
-    changePass
+    changePassword,
+    checkPassword
 }
 
 function getAll() {
@@ -64,13 +65,42 @@ function deleteOne(id) {
     })
 }
 
-async function changePass(id, newPass){
-    try{
-        newSalt = await Crypto.random32Bytes()
-        newAccessToken = await Crypto.random32Bytes()
-        console.log(newSalt,newAccessToken)
-    }
-    catch(error){
+async function changePassword(id, newPass) {
+    try {
+        accessToken = await Crypto.random32Bytes()
+        salt = await Crypto.random32Bytes()
+        password = Crypto.encodeSHA256(newPass, salt)
+        return Users.update({
+            _id: id
+        }, {
+            salt,
+            accessToken,
+            password
+        })
+    } catch (error) {
         throw error
     }
+}
+
+function checkPassword(username, password) {
+    return Users.findOne({
+        username,
+        isDeleted: false
+    }).then(user => {
+        let hashPassword = Crypto.encodeSHA256(password, user.salt)
+        if (hashPassword == user.password)
+            return {
+                status: true,
+                message: 'Correct password!'
+            }
+        else return {
+            status: false,
+            message: 'Wrong password!'
+        }
+    }).catch(error => {
+        return {
+            status: false,
+            message: 'User not found!'
+        }
+    })
 }

@@ -89,6 +89,45 @@ router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     })
 });
 
+router.post('/changePassword/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
+    let id = req.params.id
+    let newPassword = req.body.password
+    Users.changePassword(id,newPassword).then(result => {
+        console.log(result)
+        res.send(result)
+    }).catch(error => {
+        console.log(error)
+        res.send(error)
+    })
+});
+
+router.post('/changePassword', (req, res, next) => {
+    let id = req.user._id
+    let newPassword = req.body.password
+    console.log(id, newPassword)
+    Users.changePassword(id,newPassword).then(result => {
+        console.log(result)
+        res.send(result)
+    }).catch(error => {
+        console.log(error)
+        res.send(error)
+    })
+});
+
+
+router.post('/checkPassword', (req, res, next) => {
+    let id = req.user._id
+    let {username, password} = req.body
+    console.log(username, password)
+    Users.checkPassword(username,password).then(result => {
+        console.log(result)
+        res.send(result)
+    }).catch(error => {
+        console.log(error)
+        res.send(error)
+    })
+});
+
 router.post
 
 module.exports = router;
