@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 
 const STUDENTS = new mongoose.Schema({
     name: 'string',
-    size: 'string'
+    size: 'string',
+    isDeleted: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const Students = mongoose.model('Students', STUDENTS);

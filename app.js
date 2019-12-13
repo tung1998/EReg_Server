@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     next()
 // })
 
-app.use(checkUser);
+// app.use(checkUser);
 
 
 

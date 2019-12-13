@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Students = require('../model/Students')
+const Students = require('../model/students')
 
 router.get('/', (req, res, next) => {
     Students.getAll().then(result => {
@@ -21,24 +21,12 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let {
-        username,
-        password,
-        salt,
-        access_token,
-        userType,
-        email,
-        phone,
-        address
+        name,
+        size
     } = req.body
     Students.create({
-        username,
-        password,
-        salt,
-        access_token,
-        userType,
-        email,
-        phone,
-        address
+        name,
+        size
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -51,24 +39,12 @@ router.post('/', (req, res, next) => {
 router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
-        username,
-        password,
-        salt,
-        access_token,
-        userType,
-        email,
-        phone,
-        address
+        name,
+        size
     } = req.body
     Students.update(id, {
-        username,
-        password,
-        salt,
-        access_token,
-        userType,
-        email,
-        phone,
-        address
+        name,
+        size
     }).then(result => {
         console.log(result)
         res.send(result)
