@@ -1,16 +1,48 @@
 const mongoose = require('mongoose');
 
-const USERS = new mongoose.Schema({
-    name: 'string',
-    size: 'string'
+const MANAGERS = new mongoose.Schema({
+    name: String,
+    dateOfBirth: Number,
+    position: String,
+    phone: Number, 
+    email: String
 });
 
-const Users = mongoose.model('Users', USERS);
+const Managers = mongoose.model('Managers', MANAGERS);
 
 module.exports = {
-    getAll
+    getAll,
+    getByID,
+    create,
+    update,
+    deleteOne
 }
 
 function getAll() {
-    return Users.find({})
+    return Managers.find({})
+}
+
+function getByID(id) {
+    return Managers.findOne({
+        _id: ObjectId(id),
+        isDeleted: false
+    })
+}
+
+function create(data) {
+    return Managers.create(data)
+}
+
+function update(id, data) {
+    return Managers.update({
+        _id: ObjectId(id)
+    }, data)
+}
+
+function deleteOne(id) {
+    return Managers.update({
+        _id: ObjectId(id)
+    }, {
+        isDeleted: true
+    })
 }

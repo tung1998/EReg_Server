@@ -13,6 +13,10 @@ const Variable = require('./configVariables')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const studentsRouter = require('./routes/students');
+const managersRouter = require('./routes/managers');
+const roomsRouter = require('./routes/rooms');
+const shiftsRouter = require('./routes/shifts');
+const subjectsRouter = require('./routes/subjects');
 // const loginRouter = require('./routes/login');
 
 const app = express();
@@ -44,6 +48,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //add router
 app.use('/users', usersRouter);
 app.use('/students', studentsRouter);
+app.use('/managers', managersRouter);
+app.use('/rooms', roomsRouter);
+app.use('/shifts', shiftsRouter);
+app.use('/subjects', subjectsRouter);
 // app.use('/login', loginRouter);
 app.use('/', indexRouter);
 
