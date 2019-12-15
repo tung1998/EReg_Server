@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const STUDENTSUBJ = new mongoose.Schema({
-    mssv: String,
-    subject_ID: String,
+    student_id: String,
+    subject_id: String,
     term: String,
     isDeleted: {
         type: Boolean,
@@ -10,7 +10,7 @@ const STUDENTSUBJ = new mongoose.Schema({
     }
 });
 
-const StudentSubj = mongoose.model('Students', STUDENTSUBJ);
+const StudentSubj = mongoose.model('StudentSubj', STUDENTSUBJ);
 
 module.exports = {
     getAll,

@@ -21,13 +21,13 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let {
-        mssv,
-        subject_ID,
+        student_id,
+        subject_id,
         term
     } = req.body
     StudentSubj.create({
-        mssv,
-        subject_ID,
+        student_id,
+        subject_id,
         term
     }).then(result => {
         console.log(result)
@@ -41,13 +41,13 @@ router.post('/', (req, res, next) => {
 router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
-        mssv,
-        subject_ID,
+        student_id,
+        subject_id,
         term
     } = req.body
     StudentSubj.update(id, {
-        mssv,
-        subject_ID,
+        student_id,
+        subject_id,
         term
     }).then(result => {
         console.log(result)
