@@ -14,7 +14,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const studentsRouter = require('./routes/students');
 // const loginRouter = require('./routes/login');
-
+const studentSubjRouter = require('./routes/student_subject');
 const app = express();
 
 
@@ -44,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //add router
 app.use('/users', usersRouter);
 app.use('/students', studentsRouter);
+app.use('/student_subject', studentSubjRouter);
 // app.use('/login', loginRouter);
 app.use('/', indexRouter);
 
