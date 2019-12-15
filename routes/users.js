@@ -116,11 +116,8 @@ router.post('/changePassword', (req, res, next) => {
 
 
 router.post('/checkPassword', (req, res, next) => {
-    let id = req.user._id
     let {username, password} = req.body
-    console.log(username, password)
     Users.checkPassword(username,password).then(result => {
-        console.log(result)
         res.send(result)
     }).catch(error => {
         console.log(error)

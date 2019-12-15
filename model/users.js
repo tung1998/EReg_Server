@@ -91,7 +91,8 @@ function checkPassword(username, password) {
         if (hashPassword == user.password)
             return {
                 status: true,
-                message: 'Correct password!'
+                message: 'Correct password!',
+                accessToken: user.accessToken
             }
         else return {
             status: false,

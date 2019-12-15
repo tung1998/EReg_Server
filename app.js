@@ -29,13 +29,13 @@ app.use(express.urlencoded({
     extended: false
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use((req, res, next) => {
-//     req.ip = getIP(req)
-//     res.header("Access-Control-Allow-Origin", "*")
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
-//     next()
-// })
+app.use((req, res, next) => {
+    req.ip = getIP(req)
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, accesstoken ")
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+    next()
+})
 
 // app.use(checkUser);
 
@@ -73,12 +73,11 @@ function checkUser(req, res, next) {
     let url = `${req.method} ${req.originalUrl}`
     if (checkPermission(url, _PERMISSION.NO_RULE)) next()
     else {
-        let cookies = cookie.parse(req.headers.cookie || '');
-        accessToken = cookies.accessToken
+        let accessToken = req.headers.accesstoken || ''
         if (accessToken) {
             Users.getByAccessToken(accessToken).then(user => {
                 req.user = user
-                if ((user.userType == 0 && checkPermission(url, _PERMISSION.MANAGER)) || (user.userType == 1 && checkPermission(url, _PERMISSION.STUDENT))||checkPermission(url, _PERMISSION.BOTH))
+                if ((user.userType == 0 && checkPermission(url, _PERMISSION.MANAGER)) || (user.userType == 1 && checkPermission(url, _PERMISSION.STUDENT)) || checkPermission(url, _PERMISSION.BOTH))
                     next()
                 else res.send({
                     error: 'you have not permission to access!'
