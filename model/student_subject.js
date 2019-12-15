@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const STUDENTSUBJ = new mongoose.Schema({
     mssv: String,
-    subjectID: String,
+    subject_ID: String,
     term: String,
     isDeleted: {
         type: Boolean,

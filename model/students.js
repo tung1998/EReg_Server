@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const STUDENTS = new mongoose.Schema({
     name: String,
     mssv: Number,
-    brithOfDay: String,
+    dateOfBirth: String,
     sex: String,
     phone: Number,
     email: String,
