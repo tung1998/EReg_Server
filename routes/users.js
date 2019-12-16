@@ -10,17 +10,33 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/info', (req, res, next) => {
+router.get('/checkAccessToken', (req, res, next) => {
     let accessToken = req.headers.accesstoken || ''
     if (accessToken)
         Users.getByAccessToken(accessToken).then(result => {
-            res.send(result)
+            if (result) {
+                let {
+                    _id,
+                    username,
+                    userType
+                } = result
+                res.send({
+                    _id,
+                    username,
+                    userType
+                })
+            } else res.status(404).send({
+                error: error,
+                message: 'AccessToken not found!!'
+            })
         }).catch(error => {
-            res.send(error)
+            res.status(404).send({
+                error: error,
+                message: 'AccessToken not found!!'
+            })
         })
-    else res.send({
-        status: false,
-        message:'No accessToken'
+    else res.status(404).send({
+        message: 'AccessToken not found!!'
     })
 });
 

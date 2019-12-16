@@ -88,19 +88,25 @@ function checkPassword(username, password) {
         isDeleted: false
     }).then(user => {
         let hashPassword = Crypto.encodeSHA256(password, user.salt)
-        if (hashPassword == user.password)
+        if (hashPassword == user.password) {
+            let {
+                _id,
+                userType,
+                username,
+                accessToken
+            } = user
             return {
-                status: true,
+                _id,
+                username,
+                userType,
                 message: 'Correct password!',
-                accessToken: user.accessToken
+                accessToken
             }
-        else return {
-            status: false,
+        } else return {
             message: 'Wrong password!'
         }
     }).catch(error => {
         return {
-            status: false,
             message: 'User not found!'
         }
     })
