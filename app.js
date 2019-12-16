@@ -18,7 +18,7 @@ const roomsRouter = require('./routes/rooms');
 const shiftsRouter = require('./routes/shifts');
 const subjectsRouter = require('./routes/subjects');
 // const loginRouter = require('./routes/login');
-const studentSubjRouter = require('./routes/student_subject');
+const studentSubjRouter = require('./routes/studentSubject');
 const app = express();
 
 

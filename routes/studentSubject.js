@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const StudentSubj= require('../model/student_subject')
+const StudentSubj= require('../model/studentSubject')
 
 router.get('/', (req, res, next) => {
     StudentSubj.getAll().then(result => {
