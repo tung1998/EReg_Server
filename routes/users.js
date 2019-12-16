@@ -49,7 +49,7 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     })
 });
 
-router.get('/:accessToken', (req, res, next) => {
+router.get('/getByAccessToken/:accessToken', (req, res, next) => {
     let accessToken = req.params.accessToken
     Users.getByAccessToken(accessToken).then(result => {
         res.send(result)
@@ -160,6 +160,17 @@ router.post('/checkPassword', (req, res, next) => {
         password
     } = req.body
     Users.checkPassword(username, password).then(result => {
+        res.send(result)
+    }).catch(error => {
+        console.log(error)
+        res.send(error)
+    })
+});
+
+
+router.post('/deleteAccesstoken', (req, res, next) => {
+    let id = req.user._id
+    Users.deleteAccessToken(id).then(result => {
         res.send(result)
     }).catch(error => {
         console.log(error)

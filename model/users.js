@@ -24,7 +24,8 @@ module.exports = {
     deleteOne,
     getByAccessToken,
     changePassword,
-    checkPassword
+    checkPassword,
+    deleteAccessToken
 }
 
 function getAll() {
@@ -109,5 +110,14 @@ function checkPassword(username, password) {
         return {
             message: 'User not found!'
         }
+    })
+}
+
+async function deleteAccessToken(id) {
+    accessToken = await Crypto.random32Bytes()
+    return Users.update({
+        _id: ObjectId(id)
+    }, {
+        accessToken
     })
 }

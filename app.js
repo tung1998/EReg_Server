@@ -41,7 +41,7 @@ app.use((req, res, next) => {
     next()
 })
 
-// app.use(checkUser);
+app.use(checkUser);
 
 
 
