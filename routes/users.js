@@ -10,6 +10,20 @@ router.get('/', (req, res, next) => {
     })
 });
 
+router.get('/info', (req, res, next) => {
+    let accessToken = req.headers.accesstoken || ''
+    if (accessToken)
+        Users.getByAccessToken(accessToken).then(result => {
+            res.send(result)
+        }).catch(error => {
+            res.send(error)
+        })
+    else res.send({
+        status: false,
+        message:'No accessToken'
+    })
+});
+
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     Users.getByID(id).then(result => {
