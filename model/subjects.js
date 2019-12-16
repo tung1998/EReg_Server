@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const SUBJECTS= new mongoose.Schema({
     subject_id: String,
-    name: String,
+    subject_name: String,
     isDeleted: {
         type: Boolean,
         default: false
