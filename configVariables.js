@@ -9,7 +9,6 @@ function _PERMISSION() {
             /GET \/users/,
             /GET \/users\/[0-9a-fA-F]{24}/,
             /GET \/users\/getByAccessToken\/[0-9a-fA-F]+/,
-            /GET \/users\/checkAccessToken/,
             /PUT \/users\/[0-9a-fA-F]{24}/,
             /POST \/users/,
             /POST \/users\/changePassword\/[0-9a-fA-F]{24}/,
@@ -20,6 +19,7 @@ function _PERMISSION() {
             
         ],
         BOTH: [
+            /GET \/users\/checkAccessToken/,
             /POST \/users\/changePassword/,
             /POST \/users\/deleteAccesstoken/
         ],
