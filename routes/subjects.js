@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Students = require('../model/students')
+const Subjects = require('../model/subjects')
 
 router.get('/', (req, res, next) => {
-    Students.getAll().then(result => {
+    Subjects.getAll().then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.getByID(id).then(result => {
+    Subjects.getByID(id).then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -21,18 +21,12 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let {
-        name,
-        student_id,
-        dateOfBirth,
-        phone,
-        email
+        subject_id,
+        name
     } = req.body
-    Students.create({
-        name,
-        student_id,
-        dateOfBirth,
-        phone,
-        email
+    Subjects.create({
+        subject_id,
+        name
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -45,18 +39,12 @@ router.post('/', (req, res, next) => {
 router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
-        name,
-        student_id,
-        dateOfBirth,
-        phone,
-        email
+        subject_id,
+        name
     } = req.body
-    Students.update(id, {
-        name,
-        student_id,
-        dateOfBirth,
-        phone,
-        email
+    Subjects.update(id, {
+        subject_id,
+        name
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -68,7 +56,7 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.deleteOne(id).then(result => {
+    Subjects.deleteOne(id).then(result => {
         console.log(result)
         res.send(result)
     }).catch(error => {
@@ -76,7 +64,5 @@ router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
         res.send(error)
     })
 });
-
-router.post
 
 module.exports = router;

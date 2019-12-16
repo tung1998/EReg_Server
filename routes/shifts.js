@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Students = require('../model/students')
+const Shifts = require('../model/shifts')
 
 router.get('/', (req, res, next) => {
-    Students.getAll().then(result => {
+    Shifts.getAll().then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.getByID(id).then(result => {
+    Shifts.getByID(id).then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -21,18 +21,18 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let {
-        name,
+        subject_id,
+        room_id,
+        time,
         student_id,
-        dateOfBirth,
-        phone,
-        email
+        term
     } = req.body
-    Students.create({
-        name,
+    Shifts.create({
+        subject_id,
+        room_id,
+        time,
         student_id,
-        dateOfBirth,
-        phone,
-        email
+        term
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -45,18 +45,18 @@ router.post('/', (req, res, next) => {
 router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
-        name,
+        subject_id,
+        room_id,
+        time,
         student_id,
-        dateOfBirth,
-        phone,
-        email
+        term
     } = req.body
-    Students.update(id, {
-        name,
+    Shifts.update(id, {
+        subject_id,
+        room_id,
+        time,
         student_id,
-        dateOfBirth,
-        phone,
-        email
+        term
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -68,7 +68,7 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.deleteOne(id).then(result => {
+    Shifts.deleteOne(id).then(result => {
         console.log(result)
         res.send(result)
     }).catch(error => {
@@ -76,7 +76,5 @@ router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
         res.send(error)
     })
 });
-
-router.post
 
 module.exports = router;

@@ -13,8 +13,12 @@ const Variable = require('./configVariables')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const studentsRouter = require('./routes/students');
+const managersRouter = require('./routes/managers');
+const roomsRouter = require('./routes/rooms');
+const shiftsRouter = require('./routes/shifts');
+const subjectsRouter = require('./routes/subjects');
 // const loginRouter = require('./routes/login');
-
+const studentSubjRouter = require('./routes/student_subject');
 const app = express();
 
 
@@ -44,9 +48,13 @@ app.use((req, res, next) => {
 //add router
 app.use('/users', usersRouter);
 app.use('/students', studentsRouter);
+app.use('/managers', managersRouter);
+app.use('/rooms', roomsRouter);
+app.use('/shifts', shiftsRouter);
+app.use('/subjects', subjectsRouter);
+app.use('/student_subject', studentSubjRouter);
 // app.use('/login', loginRouter);
 app.use('/', indexRouter);
-
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Students = require('../model/students')
+const StudentSubj= require('../model/student_subject')
 
 router.get('/', (req, res, next) => {
-    Students.getAll().then(result => {
+    StudentSubj.getAll().then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.getByID(id).then(result => {
+    StudentSubj.getByID(id).then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -21,18 +21,14 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let {
-        name,
         student_id,
-        dateOfBirth,
-        phone,
-        email
+        subject_id,
+        term
     } = req.body
-    Students.create({
-        name,
+    StudentSubj.create({
         student_id,
-        dateOfBirth,
-        phone,
-        email
+        subject_id,
+        term
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -45,18 +41,14 @@ router.post('/', (req, res, next) => {
 router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
-        name,
         student_id,
-        dateOfBirth,
-        phone,
-        email
+        subject_id,
+        term
     } = req.body
-    Students.update(id, {
-        name,
+    StudentSubj.update(id, {
         student_id,
-        dateOfBirth,
-        phone,
-        email
+        subject_id,
+        term
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -68,7 +60,7 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.deleteOne(id).then(result => {
+    StudentSubj.deleteOne(id).then(result => {
         console.log(result)
         res.send(result)
     }).catch(error => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Students = require('../model/students')
+const Rooms = require('../model/rooms')
 
 router.get('/', (req, res, next) => {
     Students.getAll().then(result => {
@@ -21,18 +21,13 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let {
-        name,
-        student_id,
-        dateOfBirth,
-        phone,
-        email
+        room_id,
+        buiding,
+        seats
     } = req.body
     Students.create({
         name,
-        student_id,
-        dateOfBirth,
-        phone,
-        email
+        size
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -45,18 +40,14 @@ router.post('/', (req, res, next) => {
 router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
-        name,
-        student_id,
-        dateOfBirth,
-        phone,
-        email
+        room_id,
+        buiding,
+        seats
     } = req.body
     Students.update(id, {
-        name,
-        student_id,
-        dateOfBirth,
-        phone,
-        email
+        room_id,
+        buiding,
+        seats
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -77,6 +68,6 @@ router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     })
 });
 
-router.post
+
 
 module.exports = router;

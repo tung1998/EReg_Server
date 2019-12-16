@@ -1,19 +1,17 @@
 const mongoose = require('mongoose');
 
-const STUDENTS = new mongoose.Schema({
-    name: String,
+const SHIFTS = new mongoose.Schema({
+    subject_id: String,
+    room_id: String,
+    time: Date,
     student_id: Number,
-    dateOfBirth: String,
-    sex: String,
-    phone: Number,
-    email: String,
     isDeleted: {
         type: Boolean,
         default: false
     }
 });
 
-const Students = mongoose.model('Students', STUDENTS);
+const Shifts = mongoose.model('Shifts', SHIFTS);
 
 module.exports = {
     getAll,
@@ -24,30 +22,30 @@ module.exports = {
 }
 
 function getAll() {
-    return Students.find({
+    return Shifts.find({
         isDeleted: false
     })
 }
 
 function getByID(id) {
-    return Students.findOne({
+    return Shifts.findOne({
         _id: ObjectId(id),
         isDeleted: false
     })
 }
 
 function create(data) {
-    return Students.create(data)
+    return Shifts.create(data)
 }
 
 function update(id, data) {
-    return Students.update({
+    return Shifts.update({
         _id: ObjectId(id)
     }, data)
 }
 
 function deleteOne(id) {
-    return Students.update({
+    return Shifts.update({
         _id: ObjectId(id)
     }, {
         isDeleted: true

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Students = require('../model/students')
+const Managers = require('../model/managers')
 
 router.get('/', (req, res, next) => {
-    Students.getAll().then(result => {
+    Managers.getAll().then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.getByID(id).then(result => {
+    Managers.getByID(id).then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -22,15 +22,15 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 router.post('/', (req, res, next) => {
     let {
         name,
-        student_id,
         dateOfBirth,
+        position,
         phone,
         email
     } = req.body
-    Students.create({
+    Managers.create({
         name,
-        student_id,
         dateOfBirth,
+        position,
         phone,
         email
     }).then(result => {
@@ -46,15 +46,15 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
         name,
-        student_id,
         dateOfBirth,
+        position,
         phone,
         email
     } = req.body
-    Students.update(id, {
+    Managers.update(id, {
         name,
-        student_id,
         dateOfBirth,
+        position,
         phone,
         email
     }).then(result => {
@@ -68,7 +68,7 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.deleteOne(id).then(result => {
+    Managers.deleteOne(id).then(result => {
         console.log(result)
         res.send(result)
     }).catch(error => {
@@ -76,7 +76,5 @@ router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
         res.send(error)
     })
 });
-
-router.post
 
 module.exports = router;
