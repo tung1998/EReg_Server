@@ -19,8 +19,13 @@ function _PERMISSION() {
             /GET \/rooms\/[0-9a-fA-F]{24}/,
             /PUT \/rooms\/[0-9a-fA-F]{24}/,
             /POST \/rooms/,
-            /DELETE \/rooms\/[0-9a-fA-F]{24}/
-            //       
+            /DELETE \/rooms\/[0-9a-fA-F]{24}/,
+            //students
+            /GET \/students/,
+            /GET \/students\/[0-9a-fA-F]{24}/,
+            /PUT \/students\/[0-9a-fA-F]{24}/,
+            /POST \/students/,
+            /DELETE \/students\/[0-9a-fA-F]{24}/      
         ],
         STUDENT: [
             

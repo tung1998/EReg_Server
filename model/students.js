@@ -1,15 +1,27 @@
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId
 
 const STUDENTS = new mongoose.Schema({
+    studentID: String,
     name: String,
-    student_id: Number,
     dateOfBirth: String,
     sex: String,
-    phone: Number,
+    major: String,
+    classMajor: String,
+    address: String,
+    phone: String,
     email: String,
     isDeleted: {
         type: Boolean,
         default: false
+    },
+    createdTime:{
+        type: Number,
+        default: Date.now()
+    },
+    updatedTime:{
+        type: Number,
+        default: Date.now()
     }
 });
 
