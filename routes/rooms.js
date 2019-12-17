@@ -3,7 +3,7 @@ const router = express.Router();
 const Rooms = require('../model/rooms')
 
 router.get('/', (req, res, next) => {
-    Students.getAll().then(result => {
+    Rooms.getAll().then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.getByID(id).then(result => {
+    Rooms.getByID(id).then(result => {
         res.send(result)
     }).catch(error => {
         res.send(error)
@@ -21,13 +21,14 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let {
-        room_id,
-        buiding,
-        seats
-    } = req.body
-    Students.create({
         name,
-        size
+        address,
+        computerQuantity
+    } = req.body
+    Rooms.create({
+        name,
+        address,
+        computerQuantity
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -40,14 +41,14 @@ router.post('/', (req, res, next) => {
 router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
-        room_id,
-        buiding,
-        seats
+        name,
+        address,
+        computerQuantity
     } = req.body
-    Students.update(id, {
-        room_id,
-        buiding,
-        seats
+    Rooms.update(id, {
+        name,
+        address,
+        computerQuantity
     }).then(result => {
         console.log(result)
         res.send(result)
@@ -59,7 +60,7 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
-    Students.deleteOne(id).then(result => {
+    Rooms.deleteOne(id).then(result => {
         console.log(result)
         res.send(result)
     }).catch(error => {

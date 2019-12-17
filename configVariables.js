@@ -8,12 +8,19 @@ function _PERMISSION() {
             //users
             /GET \/users/,
             /GET \/users\/[0-9a-fA-F]{24}/,
-            /GET \/users\/getByAccessToken\/[0-9a-fA-F]+/,
             /PUT \/users\/[0-9a-fA-F]{24}/,
             /POST \/users/,
-            /POST \/users\/changePassword\/[0-9a-fA-F]{24}/,
             /DELETE \/users\/[0-9a-fA-F]{24}/,
-            
+
+            /GET \/users\/getByAccessToken\/[0-9a-fA-F]+/,
+            /POST \/users\/changePassword\/[0-9a-fA-F]{24}/,
+            //room
+            /GET \/rooms/,
+            /GET \/rooms\/[0-9a-fA-F]{24}/,
+            /PUT \/rooms\/[0-9a-fA-F]{24}/,
+            /POST \/rooms/,
+            /DELETE \/rooms\/[0-9a-fA-F]{24}/,
+            //       
         ],
         STUDENT: [
             

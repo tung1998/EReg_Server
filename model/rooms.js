@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const ROOMS= new mongoose.Schema({
-    room_id: String,
-    building: String,
-    seats: Number,
+    name: String,
+    address: String,
+    computerQuantity: Number,
     isDeleted: {
         type: Boolean,
         default: false
