@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId
 
-const ROOMS= new mongoose.Schema({
+const ROOMS = new mongoose.Schema({
     name: String,
     address: String,
     computerQuantity: Number,
@@ -37,10 +38,12 @@ function create(data) {
     return Rooms.create(data)
 }
 
-function update(id, data) {
-    return Rooms.update({
+async function update(id, data) {
+    return Rooms.updateOne({
         _id: ObjectId(id)
-    }, data)
+    }, {
+        $set: data
+    })
 }
 
 function deleteOne(id) {

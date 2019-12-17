@@ -93,12 +93,12 @@ function checkUser(req, res, next) {
             }).catch(error => {
                 res.send({
                     error: 'you have not permission to access!'
-                })
+                }).end()
             })
         } else {
             res.send({
                 error: 'you have not permission to access!'
-            })
+            }).end()
         }
     }
 }
