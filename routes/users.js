@@ -62,28 +62,17 @@ router.post('/', (req, res, next) => {
     let {
         username,
         password,
-        salt,
-        access_token,
         userType,
-        email,
-        phone,
-        address
     } = req.body
     Users.create({
         username,
         password,
-        salt,
-        access_token,
-        userType,
-        email,
-        phone,
-        address
+        userType
     }).then(result => {
         console.log(result)
         res.send(result)
     }).catch(error => {
-        console.log(error)
-        res.send(error)
+        res.status(404).send(error)
     })
 });
 
@@ -91,23 +80,11 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
         username,
-        password,
-        salt,
-        access_token,
         userType,
-        email,
-        phone,
-        address
     } = req.body
     Users.update(id, {
         username,
-        password,
-        salt,
-        access_token,
         userType,
-        email,
-        phone,
-        address
     }).then(result => {
         console.log(result)
         res.send(result)

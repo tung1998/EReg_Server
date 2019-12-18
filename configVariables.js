@@ -25,6 +25,7 @@ function _PERMISSION() {
             /GET \/students\/[0-9a-fA-F]{24}/,
             /PUT \/students\/[0-9a-fA-F]{24}/,
             /POST \/students/,
+            /POST \/students\/importFile/,
             /DELETE \/students\/[0-9a-fA-F]{24}/      
         ],
         STUDENT: [

@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const Students = require('../model/students')
 
+const path = require('path')
+const fs = require('fs');
+const formidable = require('formidable');
+const xlsx = require('node-xlsx')
+
 router.get('/', (req, res, next) => {
     Students.getAll().then(result => {
         res.send(result)
@@ -91,6 +96,30 @@ router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
         console.log(error)
         res.send(error)
     })
+});
+
+router.post('/importFile', (req, res, next) => {
+    let fileUpload = formidable.IncomingForm()
+    fileUpload.parse(req, function (err, fields, files) {
+        // console.log(files)
+        const fileData = xlsx.parse(fs.readFileSync(files['inputFile'].path))[0].data
+        StudentCreateList = fileData.filter((item, index) => index >= 2).map(item => {
+            return Students.create({
+                studentID: String(item[1]),
+                name: `${item[2]} ${item[3]}`,
+                dateOfBirth: item[4].split('.').reverse().join('-'),
+                sex: item[5],
+                major: item[6],
+                classMajor: item[7],
+            })
+        })
+        Promise.all(StudentCreateList).then(result => {
+            res.send(result)
+        }).catch(error => {
+            console.log(error)
+            res.send(error)
+        })
+    });
 });
 
 router.post

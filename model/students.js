@@ -1,8 +1,16 @@
 const mongoose = require('mongoose');
+const Users = require('./users')
 const ObjectId = mongoose.Types.ObjectId
 
+
 const STUDENTS = new mongoose.Schema({
-    studentID: String,
+    studentID: {
+        type: String,
+        unique: true,
+        required: true,
+        dropDups: true
+    },
+    userID: String,
     name: String,
     dateOfBirth: String,
     sex: String,
@@ -15,11 +23,11 @@ const STUDENTS = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    createdTime:{
+    createdTime: {
         type: Number,
         default: Date.now()
     },
-    updatedTime:{
+    updatedTime: {
         type: Number,
         default: Date.now()
     }
@@ -49,11 +57,24 @@ function getByID(id) {
 }
 
 function create(data) {
-    return Students.create(data)
+    return Users.create({
+        username: data.studentID,
+        password: data.studentID,
+        userType: 1,
+    }).then(result => {
+        data.userID = result._id
+        return Students.findOneAndUpdate({
+            studentID: data.studentID
+        }, data, {
+            upsert: true,
+            new: true,
+            setDefaultsOnInsert: true
+        })
+    })
 }
 
 function update(id, data) {
-    return Students.update({
+    return Students.findOneAndUpdate({
         _id: ObjectId(id)
     }, data)
 }

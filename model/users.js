@@ -3,11 +3,19 @@ const Crypto = require('./crypto')
 const ObjectId = mongoose.Types.ObjectId
 
 const USERS = new mongoose.Schema({
-    username: String,
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+        dropDups: true
+    },
     password: String,
     salt: String,
     accessToken: String,
-    userType: Number,
+    userType: {
+        type: Number,
+        default: 1
+    },
     isDeleted: {
         type: Boolean,
         default: false
@@ -48,8 +56,17 @@ function getByAccessToken(accessToken) {
     })
 }
 
-function create(data) {
-    return Users.create(data)
+async function create(data) {
+    data.accessToken = await Crypto.random32Bytes()
+    data.salt = await Crypto.random32Bytes()
+    data.password = Crypto.encodeSHA256(data.password, data.salt)
+    return Users.findOneAndUpdate({
+        username: data.username
+    }, data, {
+        upsert: true,
+        new: true,
+        setDefaultsOnInsert: true
+    })
 }
 
 function update(id, data) {
@@ -112,6 +129,7 @@ function checkPassword(username, password) {
         }
     })
 }
+
 
 async function deleteAccessToken(id) {
     accessToken = await Crypto.random32Bytes()
