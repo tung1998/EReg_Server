@@ -21,17 +21,17 @@ router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     let {
-        subject_id,
-        room_id,
+        subjectID,
+        roomID,
         time,
-        student_id,
+        studentID,
         term
     } = req.body
     Shifts.create({
-        subject_id,
-        room_id,
+        subjectID,
+        roomID,
         time,
-        student_id,
+        studentID,
         term
     }).then(result => {
         console.log(result)
@@ -45,17 +45,17 @@ router.post('/', (req, res, next) => {
 router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     let {
-        subject_id,
-        room_id,
+        subjectID,
+        roomID,
         time,
-        student_id,
+        studentID,
         term
     } = req.body
     Shifts.update(id, {
-        subject_id,
-        room_id,
+        subjectID,
+        roomID,
         time,
-        student_id,
+        studentID,
         term
     }).then(result => {
         console.log(result)
@@ -76,5 +76,6 @@ router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
         res.send(error)
     })
 });
+router.post
 
 module.exports = router;

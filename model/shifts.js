@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
+const Users = require('./users')
+const ObjectId = mongoose.Types.ObjectId
 
 const SHIFTS = new mongoose.Schema({
-    subject_id: String,
-    room_id: String,
-    time: Date,
-    student_id: Number,
+    subjectID: String,
+    roomID: String,
+    time: String,
+    studentID: String,
+    term: String,
     isDeleted: {
         type: Boolean,
         default: false

@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId
 
 const SUBJECTS= new mongoose.Schema({
-    subject_id: String,
-    subject_name: String,
+    subjectID: String,
+    name: String,
     isDeleted: {
         type: Boolean,
         default: false
@@ -37,7 +38,7 @@ function create(data) {
 }
 
 function update(id, data) {
-    return Subjects.update({
+    return Subjects.updateOne({
         _id: ObjectId(id)
     }, data)
 }
