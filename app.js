@@ -17,6 +17,7 @@ const managersRouter = require('./routes/managers');
 const roomsRouter = require('./routes/rooms');
 const shiftsRouter = require('./routes/shifts');
 const subjectsRouter = require('./routes/subjects');
+const termsRouter = require('./routes/terms');
 // const loginRouter = require('./routes/login');
 const studentSubjRouter = require('./routes/studentSubject');
 const app = express();
@@ -52,7 +53,9 @@ app.use('/managers', managersRouter);
 app.use('/rooms', roomsRouter);
 app.use('/shifts', shiftsRouter);
 app.use('/subjects', subjectsRouter);
+app.use('/terms', termsRouter);
 app.use('/student_subject', studentSubjRouter);
+
 // app.use('/login', loginRouter);
 app.use('/', indexRouter);
 
