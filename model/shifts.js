@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const Users = require('./users')
 const ObjectId = mongoose.Types.ObjectId
 
 const SHIFTS = new mongoose.Schema({
     subjectID: String,
+    shiftExam: String,
     roomID: String,
-    time: String,
+    time: String,  
     studentID: String,
     term: String,
     isDeleted: {

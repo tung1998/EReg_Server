@@ -23,6 +23,7 @@ router.post('/', (req, res, next) => {
     let {
         subjectID,
         roomID,
+        shiftExam,
         time,
         studentID,
         term
@@ -30,6 +31,7 @@ router.post('/', (req, res, next) => {
     Shifts.create({
         subjectID,
         roomID,
+        shiftExam,
         time,
         studentID,
         term
@@ -47,6 +49,7 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let {
         subjectID,
         roomID,
+        shiftExam,
         time,
         studentID,
         term
@@ -54,6 +57,7 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     Shifts.update(id, {
         subjectID,
         roomID,
+        shiftExam,
         time,
         studentID,
         term
