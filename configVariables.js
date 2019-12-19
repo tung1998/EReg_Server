@@ -38,7 +38,13 @@ function _PERMISSION() {
             /GET \/shift\/[0-9a-fA-F]{24}/,
             /PUT \/shift\/[0-9a-fA-F]{24}/,
             /POST \/shift/,
-            /DELETE \/shift\/[0-9a-fA-F]{24}/  
+            /DELETE \/shift\/[0-9a-fA-F]{24}/, 
+            //term
+            /GET \/term/,
+            /GET \/term\/[0-9a-fA-F]{24}/,
+            /PUT \/term\/[0-9a-fA-F]{24}/,
+            /POST \/term/,
+            /DELETE \/term\/[0-9a-fA-F]{24}/  
         ],
         STUDENT: [
             
