@@ -11,7 +11,6 @@ function _PERMISSION() {
             /PUT \/users\/[0-9a-fA-F]{24}/,
             /POST \/users/,
             /DELETE \/users\/[0-9a-fA-F]{24}/,
-
             /GET \/users\/getByAccessToken\/[0-9a-fA-F]+/,
             /POST \/users\/changePassword\/[0-9a-fA-F]{24}/,
             //room
@@ -28,23 +27,23 @@ function _PERMISSION() {
             /POST \/students\/importFile/,
             /DELETE \/students\/[0-9a-fA-F]{24}/,
             //subject
-            /GET \/subject/,
-            /GET \/subject\/[0-9a-fA-F]{24}/,
-            /PUT \/subject\/[0-9a-fA-F]{24}/,
-            /POST \/subject/,
-            /DELETE \/subject\/[0-9a-fA-F]{24}/,
+            /GET \/subjects/,
+            /GET \/subjects\/[0-9a-fA-F]{24}/,
+            /PUT \/subjects\/[0-9a-fA-F]{24}/,
+            /POST \/subjects/,
+            /DELETE \/subjects\/[0-9a-fA-F]{24}/,
             //shift
-            /GET \/shift/,
-            /GET \/shift\/[0-9a-fA-F]{24}/,
-            /PUT \/shift\/[0-9a-fA-F]{24}/,
-            /POST \/shift/,
-            /DELETE \/shift\/[0-9a-fA-F]{24}/, 
+            /GET \/shifts/,
+            /GET \/shifts\/[0-9a-fA-F]{24}/,
+            /PUT \/shifts\/[0-9a-fA-F]{24}/,
+            /POST \/shifts/,
+            /DELETE \/shifts\/[0-9a-fA-F]{24}/, 
             //term
-            /GET \/term/,
-            /GET \/term\/[0-9a-fA-F]{24}/,
-            /PUT \/term\/[0-9a-fA-F]{24}/,
-            /POST \/term/,
-            /DELETE \/term\/[0-9a-fA-F]{24}/  
+            /GET \/terms/,
+            /GET \/terms\/[0-9a-fA-F]{24}/,
+            /PUT \/terms\/[0-9a-fA-F]{24}/,
+            /POST \/terms/,
+            /DELETE \/terms\/[0-9a-fA-F]{24}/  
         ],
         STUDENT: [
             
