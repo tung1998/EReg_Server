@@ -17,6 +17,8 @@ const managersRouter = require('./routes/managers');
 const roomsRouter = require('./routes/rooms');
 const shiftsRouter = require('./routes/shifts');
 const subjectsRouter = require('./routes/subjects');
+const termsRouter = require('./routes/terms');
+const termSubStusRouter = require('./routes/termSubStus');
 // const loginRouter = require('./routes/login');
 const studentSubjRouter = require('./routes/studentSubject');
 const app = express();
@@ -34,11 +36,11 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
-    req.ip = getIP(req)
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers", "*")
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
-    next()
+req.ip = getIP(req)
+res.header("Access-Control-Allow-Origin", "*")
+res.header("Access-Control-Allow-Headers", "*")
+res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+next()
 })
 
 app.use(checkUser);
@@ -52,7 +54,10 @@ app.use('/managers', managersRouter);
 app.use('/rooms', roomsRouter);
 app.use('/shifts', shiftsRouter);
 app.use('/subjects', subjectsRouter);
+app.use('/terms', termsRouter);
+app.use('/termSubStus', termSubStusRouter);
 app.use('/student_subject', studentSubjRouter);
+
 // app.use('/login', loginRouter);
 app.use('/', indexRouter);
 

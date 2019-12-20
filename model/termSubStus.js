@@ -1,20 +1,18 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId
 
-const SHIFTS = new mongoose.Schema({
+const TERMSUBSTUS = new mongoose.Schema({
+    termID: String,
     subjectID: String,
-    shiftExam: String,
-    roomID: String,
-    time: String,
-    studentID: Array,
-    term: String,
+    subjectName: String,
+    student: String,
     isDeleted: {
         type: Boolean,
         default: false
     }
 });
 
-const Shifts = mongoose.model('Shifts', SHIFTS);
+const TermSubStus = mongoose.model('TermSubStus', TERMSUBSTUS);
 
 module.exports = {
     getAll,
@@ -25,24 +23,24 @@ module.exports = {
 }
 
 function getAll() {
-    return Shifts.find({
+    return TermSubStus.find({
         isDeleted: false
     })
 }
 
 function getByID(id) {
-    return Shifts.findOne({
+    return TermSubStus.findOne({
         _id: ObjectId(id),
         isDeleted: false
     })
 }
 
 function create(data) {
-    return Shifts.create(data)
+    return TermSubStus.create(data)
 }
 
 async function update(id, data) {
-    return Shifts.update({
+    return TermSubStus.updateOne({
         _id: ObjectId(id)
     }, {
         $set: data
@@ -50,7 +48,7 @@ async function update(id, data) {
 }
 
 function deleteOne(id) {
-    return Shifts.update({
+    return TermSubStus.update({
         _id: ObjectId(id)
     }, {
         isDeleted: true
