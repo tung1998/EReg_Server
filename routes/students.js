@@ -109,8 +109,8 @@ router.post('/importFile', (req, res, next) => {
                 name: `${item[2]} ${item[3]}`,
                 dateOfBirth: item[4].split('.').reverse().join('-'),
                 sex: item[5],
-                major: item[6],
-                classMajor: item[7],
+                major: item[7],
+                classMajor: item[6],
             })
         })
         Promise.all(StudentCreateList).then(result => {
