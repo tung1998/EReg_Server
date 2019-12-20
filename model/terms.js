@@ -3,11 +3,11 @@ const ObjectId = mongoose.Types.ObjectId
 
 const TERMS = new mongoose.Schema({
     name: String,
-    startTime: Date,
-    endTime: Date,
+    startTime: String,
+    endTime: String,
     subject: String,
-    registSTime: Date,
-    registETime: Date,
+    registSTime: String,
+    registETime: String,
     isDeleted: {
         type: Boolean,
         default: false

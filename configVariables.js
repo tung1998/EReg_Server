@@ -43,7 +43,13 @@ function _PERMISSION() {
             /GET \/terms\/[0-9a-fA-F]{24}/,
             /PUT \/terms\/[0-9a-fA-F]{24}/,
             /POST \/terms/,
-            /DELETE \/terms\/[0-9a-fA-F]{24}/  
+            /DELETE \/terms\/[0-9a-fA-F]{24}/,
+            //term-subject-student
+             /GET \/termSubStus/,
+             /GET \/termSubStus\/[0-9a-fA-F]{24}/,
+             /PUT \/termSubStus\/[0-9a-fA-F]{24}/,
+             /POST \/termSubStus/,
+             /DELETE \/termSubStus\/[0-9a-fA-F]{24}/  
         ],
         STUDENT: [
             
