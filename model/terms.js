@@ -5,7 +5,6 @@ const TERMS = new mongoose.Schema({
     name: String,
     startTime: String,
     endTime: String,
-    subject: String,
     registSTime: String,
     registETime: String,
     isDeleted: {

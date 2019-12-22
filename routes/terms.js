@@ -24,7 +24,6 @@ router.post('/', (req, res, next) => {
         name,
         startTime,
         endTime,
-        subject,
         registSTime,
         registETime
     } = req.body
@@ -32,7 +31,6 @@ router.post('/', (req, res, next) => {
         name,
         startTime,
         endTime,
-        subject,
         registSTime,
         registETime
     }).then(result => {
@@ -50,7 +48,6 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
         name,
         startTime,
         endTime,
-        subject,
         registSTime,
         registETime
     } = req.body
@@ -58,11 +55,9 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
         name,
         startTime,
         endTime,
-        subject,
         registSTime,
         registETime
     }).then(result => {
-        console.log(result)
         res.send(result)
     }).catch(error => {
         console.log(error)
@@ -73,7 +68,6 @@ router.put('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
 router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     Terms.deleteOne(id).then(result => {
-        console.log(result)
         res.send(result)
     }).catch(error => {
         console.log(error)
