@@ -5,7 +5,7 @@ const TERMSUBSTUS = new mongoose.Schema({
     termID: String,
     subjectID: String,
     subjectName: String,
-    student: String,
+    studentList: Array,
     isDeleted: {
         type: Boolean,
         default: false
@@ -19,7 +19,8 @@ module.exports = {
     getByID,
     create,
     update,
-    deleteOne
+    deleteOne,
+    addStudents
 }
 
 function getAll() {
@@ -52,5 +53,15 @@ function deleteOne(id) {
         _id: ObjectId(id)
     }, {
         isDeleted: true
+    })
+}
+
+function addStudents(id, studentList) {
+    return TermSubStus.findOneAndUpdate({
+        _id: ObjectId(id)
+    }, {
+        $addToSet: {
+            studentList
+        }
     })
 }

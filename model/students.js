@@ -40,7 +40,8 @@ module.exports = {
     getByID,
     create,
     update,
-    deleteOne
+    deleteOne,
+    getByStudentID
 }
 
 function getAll() {
@@ -52,6 +53,13 @@ function getAll() {
 function getByID(id) {
     return Students.findOne({
         _id: ObjectId(id),
+        isDeleted: false
+    })
+}
+
+function getByStudentID(id) {
+    return Students.findOne({
+        studentID: id,
         isDeleted: false
     })
 }

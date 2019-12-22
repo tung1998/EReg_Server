@@ -37,7 +37,7 @@ function _PERMISSION() {
             /GET \/shifts\/[0-9a-fA-F]{24}/,
             /PUT \/shifts\/[0-9a-fA-F]{24}/,
             /POST \/shifts/,
-            /DELETE \/shifts\/[0-9a-fA-F]{24}/, 
+            /DELETE \/shifts\/[0-9a-fA-F]{24}/,
             //term
             /GET \/terms/,
             /GET \/terms\/[0-9a-fA-F]{24}/,
@@ -45,14 +45,15 @@ function _PERMISSION() {
             /POST \/terms/,
             /DELETE \/terms\/[0-9a-fA-F]{24}/,
             //term-subject-student
-             /GET \/termSubStus/,
-             /GET \/termSubStus\/[0-9a-fA-F]{24}/,
-             /PUT \/termSubStus\/[0-9a-fA-F]{24}/,
-             /POST \/termSubStus/,
-             /DELETE \/termSubStus\/[0-9a-fA-F]{24}/  
+            /GET \/termSubStus/,
+            /GET \/termSubStus\/[0-9a-fA-F]{24}/,
+            /PUT \/termSubStus\/[0-9a-fA-F]{24}/,
+            /POST \/termSubStus/,
+            /DELETE \/termSubStus\/[0-9a-fA-F]{24}/,
+            /POST \/termSubStus\/importFile\/[0-9a-fA-F]{24}/,
         ],
         STUDENT: [
-            
+
         ],
         BOTH: [
             /GET \/users\/checkAccessToken/,
