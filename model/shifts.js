@@ -7,7 +7,7 @@ const SHIFTS = new mongoose.Schema({
     roomID: String,
     time: String,
     studentID: Array,
-    term: String,
+    termID: String,
     isDeleted: {
         type: Boolean,
         default: false
