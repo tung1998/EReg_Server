@@ -4,6 +4,7 @@ const Shifts = require('../model/shifts')
 const TermSubStus = require('../model/termSubStus')
 const Terms = require('../model/terms')
 const Rooms = require('../model/rooms')
+const Students = require('../model/students')
 
 router.get('/', (req, res, next) => {
     Shifts.getAll().then(result => {
@@ -18,7 +19,6 @@ router.get('/getAvaiableShift', (req, res, next) => {
         return TermSubStus.getAvaiable(term._id, req.user.username)
     }).then(result => {
         let subjectID = result.map(item => item._id)
-        console.log(subjectID)
         return Shifts.getAvaiableShift(subjectID)
     }).then(async result => {
         let room = await Promise.all(result.map(item => {
@@ -108,17 +108,28 @@ router.post('/registerShift', (req, res, next) => {
     let {
         shiftID,
     } = req.body
-    console.log(shiftID,req.user._id)
-    res.send('1111')
-    // Shifts.create({
-    //     shiftID
-    // }).then(result => {
-    //     console.log(result)
-    //     res.send(result)
-    // }).catch(error => {
-    //     console.log(error)
-    //     res.send(error)
-    // })
+    Shifts.getByID(shiftID).then(async result => {
+        let room = Rooms.getByID(result.roomID)
+        if (result.studentID.length >= room.computerQuantity)
+            res.status(404).send({
+                error: 'Quá số lượng đăng ký!!'
+            })
+        else return Shifts.getBySubjectID(result.subjectID)
+    }).then(async result => {
+
+        let studentID = await Students.getByUserID(req.user._id)
+        let otherShift = result.filter(item => item._id != shiftID)
+        let update = otherShift.map(item => {
+            return Shifts.removeStudent(item._id, studentID._id)
+        })
+        update.push(Shifts.addStudent(shiftID, studentID._id))
+        return Promise.all(update)
+    }).then(result => {
+        res.send(result)
+    }).catch(error => {
+        console.log(error)
+        res.send(error)
+    })
 });
 
 router.post

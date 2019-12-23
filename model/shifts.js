@@ -22,7 +22,10 @@ module.exports = {
     create,
     update,
     deleteOne,
-    getAvaiableShift
+    getAvaiableShift,
+    getBySubjectID,
+    removeStudent,
+    addStudent
 }
 
 function getAll() {
@@ -34,6 +37,13 @@ function getAll() {
 function getByID(id) {
     return Shifts.findOne({
         _id: ObjectId(id),
+        isDeleted: false
+    })
+}
+
+function getBySubjectID(subjectID) {
+    return Shifts.find({
+        subjectID,
         isDeleted: false
     })
 }
@@ -65,5 +75,25 @@ function getAvaiableShift(subjectIDs) {
             $in: subjectIDs
         },
         isDeleted: false
+    })
+}
+
+function addStudent(shiftID, studentID) {
+    return Shifts.updateOne({
+        _id: ObjectId(shiftID)
+    }, {
+        $push: {
+            studentID
+        }
+    })
+}
+
+function removeStudent(shiftID, studentID) {
+    return Shifts.updateOne({
+        _id: ObjectId(shiftID)
+    }, {
+        $pull: {
+            studentID
+        }
     })
 }
