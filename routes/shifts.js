@@ -40,6 +40,16 @@ router.get('/getRegisterShiftByTerm/:id(\[0-9a-fA-F]{24})', async (req, res, nex
     res.send(ShiftList)
 });
 
+router.get('/getStudent/:id(\[0-9a-fA-F]{24})', async (req, res, next) => {
+    let Shift = await Shifts.getByID(req.params.id)
+    Students.getManyByIDs(Shift.studentID).then(result => {
+        res.send(result)
+    }).catch(error => {
+        console.log(error)
+        res.send(error)
+    })
+});
+
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
 

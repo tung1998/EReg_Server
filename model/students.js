@@ -42,7 +42,8 @@ module.exports = {
     update,
     deleteOne,
     getByStudentID,
-    getByUserID
+    getByUserID,
+    getManyByIDs
 }
 
 function getAll() {
@@ -54,6 +55,15 @@ function getAll() {
 function getByID(id) {
     return Students.findOne({
         _id: ObjectId(id),
+        isDeleted: false
+    })
+}
+
+function getManyByIDs(ids) {
+    return Students.find({
+        _id: {
+            $in: ids.map(ObjectId)
+        },
         isDeleted: false
     })
 }
