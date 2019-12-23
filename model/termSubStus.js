@@ -20,7 +20,8 @@ module.exports = {
     create,
     update,
     deleteOne,
-    addStudents
+    addStudents,
+    getAvaiable
 }
 
 function getAll() {
@@ -63,5 +64,17 @@ function addStudents(id, studentList) {
         $addToSet: {
             studentList
         }
+    })
+}
+
+function getAvaiable(termID, studentID) {
+    return TermSubStus.find({
+        termID,
+        studentList: {
+            $elemMatch: {
+                studentID: studentID,
+            }
+        },
+        isDeleted: false
     })
 }

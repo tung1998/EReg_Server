@@ -21,7 +21,8 @@ module.exports = {
     getByID,
     create,
     update,
-    deleteOne
+    deleteOne,
+    getAvaiableShift
 }
 
 function getAll() {
@@ -54,5 +55,15 @@ function deleteOne(id) {
         _id: ObjectId(id)
     }, {
         isDeleted: true
+    })
+}
+
+
+function getAvaiableShift(subjectIDs) {
+    return Shifts.find({
+        subjectID: {
+            $in: subjectIDs
+        },
+        isDeleted: false
     })
 }

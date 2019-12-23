@@ -15,6 +15,14 @@ router.get('/', (req, res, next) => {
     })
 });
 
+router.get('/currentInfo', (req, res, next) => {
+    Students.getByUserID(req.user._id).then(result => {
+        res.send(result)
+    }).catch(error => {
+        res.send(error)
+    })
+});
+
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
     Students.getByID(id).then(result => {

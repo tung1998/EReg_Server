@@ -20,7 +20,8 @@ module.exports = {
     getByID,
     create,
     update,
-    deleteOne
+    deleteOne,
+    getCurrentTerm
 }
 
 function getAll() {
@@ -53,5 +54,18 @@ function deleteOne(id) {
         _id: ObjectId(id)
     }, {
         isDeleted: true
+    })
+}
+
+function getCurrentTerm(){
+    return Terms.find({
+        isDeleted: false
+    }).then(result=>{
+        let currentTime = new Date().getTime()
+        return result.filter(item=>{
+            let registSTime  = new Date(item.registSTime).getTime()
+            let registETime  = new Date(item.registSTime).getTime()
+            return registSTime<=currentTime<=registETime
+        })[0]
     })
 }

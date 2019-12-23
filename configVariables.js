@@ -45,7 +45,6 @@ function _PERMISSION() {
             /POST \/terms/,
             /DELETE \/terms\/[0-9a-fA-F]{24}/,
             //term-subject-student
-            /GET \/termSubStus/,
             /GET \/termSubStus\/[0-9a-fA-F]{24}/,
             /PUT \/termSubStus\/[0-9a-fA-F]{24}/,
             /POST \/termSubStus/,
@@ -53,12 +52,14 @@ function _PERMISSION() {
             /POST \/termSubStus\/importFile\/[0-9a-fA-F]{24}/,
         ],
         STUDENT: [
-
+            /GET \/shifts\/getAvaiableShift/,
+            /GET \/students\/currentInfo/,
         ],
         BOTH: [
             /GET \/users\/checkAccessToken/,
             /POST \/users\/changePassword/,
-            /POST \/users\/deleteAccesstoken/
+            /POST \/users\/deleteAccesstoken/,
+            /GET \/termSubStus/,
         ],
         NO_RULE: [
             /POST \/users\/checkPassword/,
