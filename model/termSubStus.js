@@ -21,7 +21,8 @@ module.exports = {
     update,
     deleteOne,
     addStudents,
-    getAvaiable
+    getAvaiable,
+    getByTermID
 }
 
 function getAll() {
@@ -33,6 +34,13 @@ function getAll() {
 function getByID(id) {
     return TermSubStus.findOne({
         _id: ObjectId(id),
+        isDeleted: false
+    })
+}
+
+function getByTermID(id) {
+    return TermSubStus.find({
+        termID: id,
         isDeleted: false
     })
 }

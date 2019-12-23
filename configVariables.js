@@ -38,7 +38,7 @@ function _PERMISSION() {
             /POST \/shifts/,
             /DELETE \/shifts\/[0-9a-fA-F]{24}/,
             //term
-            /GET \/terms/,
+
             /GET \/terms\/[0-9a-fA-F]{24}/,
             /PUT \/terms\/[0-9a-fA-F]{24}/,
             /POST \/terms/,
@@ -51,11 +51,14 @@ function _PERMISSION() {
             /POST \/termSubStus\/importFile\/[0-9a-fA-F]{24}/,
         ],
         STUDENT: [
+            /GET \/subjects/,
             /GET \/shifts\/getAvaiableShift/,
+            /GET \/shifts\/getRegisterShiftByTerm\/[0-9a-fA-F]{24}/,
             /POST \/shifts\/registerShift/,
             /GET \/students\/currentInfo/,
         ],
         BOTH: [
+            /GET \/terms/,
             /GET \/rooms/,
             /GET \/users\/checkAccessToken/,
             /POST \/users\/changePassword/,

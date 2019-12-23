@@ -32,6 +32,14 @@ router.get('/getAvaiableShift', (req, res, next) => {
     })
 });
 
+router.get('/getRegisterShiftByTerm/:id(\[0-9a-fA-F]{24})', async (req, res, next) => {
+    let studentID = await Students.getByUserID(req.user._id)
+    let TermSubStusList = await TermSubStus.getByTermID(req.params.id)
+    let subjectID = TermSubStusList.map(item => item._id)
+    let ShiftList = await Shifts.getRegister(subjectID, studentID._id)
+    res.send(ShiftList)
+});
+
 router.get('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
     let id = req.params.id
 
@@ -131,6 +139,8 @@ router.post('/registerShift', (req, res, next) => {
         res.send(error)
     })
 });
+
+
 
 router.post
 

@@ -25,7 +25,8 @@ module.exports = {
     getAvaiableShift,
     getBySubjectID,
     removeStudent,
-    addStudent
+    addStudent,
+    getRegister
 }
 
 function getAll() {
@@ -74,6 +75,16 @@ function getAvaiableShift(subjectIDs) {
         subjectID: {
             $in: subjectIDs
         },
+        isDeleted: false
+    })
+}
+
+function getRegister(subjectIDs, studentID) {
+    return Shifts.find({
+        subjectID: {
+            $in: subjectIDs
+        },
+        studentID,
         isDeleted: false
     })
 }
