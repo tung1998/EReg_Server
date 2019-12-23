@@ -18,6 +18,7 @@ router.get('/getAvaiableShift', (req, res, next) => {
         return TermSubStus.getAvaiable(term._id, req.user.username)
     }).then(result => {
         let subjectID = result.map(item => item._id)
+        console.log(subjectID)
         return Shifts.getAvaiableShift(subjectID)
     }).then(async result => {
         let room = await Promise.all(result.map(item => {
@@ -102,6 +103,24 @@ router.delete('/:id(\[0-9a-fA-F]{24})', (req, res, next) => {
         res.send(error)
     })
 });
+
+router.post('/registerShift', (req, res, next) => {
+    let {
+        shiftID,
+    } = req.body
+    console.log(shiftID,req.user._id)
+    res.send('1111')
+    // Shifts.create({
+    //     shiftID
+    // }).then(result => {
+    //     console.log(result)
+    //     res.send(result)
+    // }).catch(error => {
+    //     console.log(error)
+    //     res.send(error)
+    // })
+});
+
 router.post
 
 module.exports = router;

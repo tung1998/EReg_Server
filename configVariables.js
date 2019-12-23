@@ -14,7 +14,6 @@ function _PERMISSION() {
             /GET \/users\/getByAccessToken\/[0-9a-fA-F]+/,
             /POST \/users\/changePassword\/[0-9a-fA-F]{24}/,
             //room
-            /GET \/rooms/,
             /GET \/rooms\/[0-9a-fA-F]{24}/,
             /PUT \/rooms\/[0-9a-fA-F]{24}/,
             /POST \/rooms/,
@@ -53,9 +52,11 @@ function _PERMISSION() {
         ],
         STUDENT: [
             /GET \/shifts\/getAvaiableShift/,
+            /POST \/shifts\/registerShift/,
             /GET \/students\/currentInfo/,
         ],
         BOTH: [
+            /GET \/rooms/,
             /GET \/users\/checkAccessToken/,
             /POST \/users\/changePassword/,
             /POST \/users\/deleteAccesstoken/,

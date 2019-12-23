@@ -64,8 +64,8 @@ function getCurrentTerm(){
         let currentTime = new Date().getTime()
         return result.filter(item=>{
             let registSTime  = new Date(item.registSTime).getTime()
-            let registETime  = new Date(item.registSTime).getTime()
-            return registSTime<=currentTime<=registETime
+            let registETime  = new Date(item.registETime).getTime()
+            return registSTime<=currentTime&&currentTime<=registETime
         })[0]
     })
 }
