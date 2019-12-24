@@ -81,7 +81,8 @@ function getAvaiable(termID, studentID) {
         studentList: {
             $elemMatch: {
                 studentID: studentID,
-            }
+                examRegisAble: true
+            },
         },
         isDeleted: false
     })
